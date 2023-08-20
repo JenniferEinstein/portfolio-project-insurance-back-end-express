@@ -20,7 +20,7 @@ app.get('/', function (req, res) {
 
 // (implement the index route that uses pg-promise to query your db)
 const entryController = require("./controllers/entryController.js");
-app.use("/entry", entryController);
+app.use("/entries", entryController);
 
 
 // 404 PAGE

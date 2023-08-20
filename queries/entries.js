@@ -55,7 +55,7 @@ const deleteEntry = async(id) => {
     try {const deletedEntry = await db.one(
         "DELETE FROM entries WHERE id = $1 RETURNING *", id
     );
-    return deletedSong;
+    return deletedEntry;
     } catch(error){
         return error;
         }
