@@ -29,7 +29,7 @@ entries.get("/", async(req,res)=>{
 });
 
 // =====  SHOW ONE ENTRY =====
-entries.get("/:id", async(req,res)=>{
+entries.get("/entry/:id", async(req,res)=>{
     const id = req.params.id;
     const entry = await getEntry(id);
     if(entry) {

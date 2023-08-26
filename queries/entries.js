@@ -19,9 +19,9 @@ const getEntry = async(id) => {
         const oneEntry = await db.one("SELECT * FROM entries WHERE id=$1", id);
         return oneEntry;
     } catch (error) {
-        return error;
+        return { error: "entry not found" };
     }
-}
+};
 
 // === CREATE AN ENTRY ===
 const createEntry = async(entry) => {
