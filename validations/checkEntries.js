@@ -22,6 +22,6 @@ const checkBoolean = (req, res, next) => {
   module.exports = {
     checkBoolean,
     checkPatient: (req, res, next) => checkRequiredField(req, res, next, 'patient', 'The name of the patient is required.'),
-    checkDate: (req, res, next) => checkRequiredField(req, res, next, 'date', 'The date of service is required.'),
+    // checkDate: (req, res, next) => checkRequiredField(req, res, next, 'date', 'The date of service is required.'),
     checkDescription: (req, res, next) => checkRequiredField(req, res, next, 'cost', 'What was this for? The description is required.'),
   };
