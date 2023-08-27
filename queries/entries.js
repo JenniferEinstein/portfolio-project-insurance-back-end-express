@@ -62,10 +62,24 @@ const deleteEntry = async(id) => {
 };
 
 
+
+// === SPECIFIC SEARCHES ===
+const billsToSendToInsurance = async() => {
+    try{
+        const allEntries = await db.any("SELECT * FROM entries WHERE status NOT LIKE '%done%'");
+        return allEntries;
+    } catch (error) {
+        return error;
+    }
+}
+
+
+
 module.exports = { 
     getAllEntries,
     getEntry,
     createEntry,
     updateEntry,
     deleteEntry,
+    billsToSendToInsurance,
 } 
