@@ -10,7 +10,7 @@ const {
 
 const {
     checkBoolean,
-    checkDate,
+    // checkDate,
     checkDescription,
     checkPatient,
 } = require("../validations/checkEntries");
@@ -41,7 +41,7 @@ entries.get("/entry/:id", async(req,res)=>{
 
 
 // =====  CREATE  =====
-entries.post("/", checkBoolean, checkDate, checkDescription, checkPatient, async(req,res)=> {
+entries.post("/", checkBoolean, checkDescription, checkPatient, async(req,res)=> {
     try{
         const entry = await createEntry(req.body);
         res.json(entry);
@@ -52,7 +52,7 @@ entries.post("/", checkBoolean, checkDate, checkDescription, checkPatient, async
 
 
 // =====  EDIT/UPDATE/PUT  =====
-entries.put('/:id', checkBoolean, checkDate, checkDescription, checkPatient, async(req,res)=> {
+entries.put('/:id', checkBoolean, checkDescription, checkPatient, async(req,res)=> {
     const id = req.params.id;
     const updatedEntry = await updateEntry(id, req.body);
     res.status(200).json(updatedEntry);
