@@ -27,7 +27,7 @@ const getEntry = async(id) => {
 const createEntry = async(entry) => {
     try {
         const newEntry = await db.one(
-            "INSERT INTO entries (patient, service_date, description, cost, insurance, status, sentto_how, sentto_when, claimnumber, eob, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *",
+            "INSERT INTO entries (patient, service_date, description, cost, insurance, status, sentto_how, sentto_when, claimnumber, eob, notes) VALUES ($1, TO_DATE($2, 'YYYY-MM-DD'), $3, $4, $5, $6, $7, TO_DATE($8, 'YYYY-MM-DD'), $9, $10, $11) RETURNING *",
             [entry.patient, entry.service_date, entry.description, entry.cost, entry.insurance, entry.status, entry.sentto_how, entry.sentto_when, entry.claimnumber, entry.eob, entry.notes]
         );
         return newEntry; 
@@ -40,7 +40,7 @@ const createEntry = async(entry) => {
 // === EDIT AN ENTRY (UPDATE) ===
 const updateEntry = async(id, entry) => {
     try {const updatedEntry = await db.one(
-            "UPDATE entries SET patient=$1, service_date=$2, description=$3, cost=$4, insurance=$5, status=$6, sentto_how=$7, sentto_when=$8, claimnumber=$9, eob=$10, notes=$11 RETURNING *",
+            "UPDATE entries SET patient=$1, service_date=TO_DATE($2, 'YYYY-MM-DD'), description=$3, cost=$4, insurance=$5, status=$6, sentto_how=$7, sentto_when=TO_DATE($8, 'YYYY-MM-DD'), claimnumber=$9, eob=$10, notes=$11 RETURNING *",
             [entry.patient, entry.service_date, entry.description, entry.cost, entry.insurance, entry.status, entry.sentto_how, entry.sentto_when, entry.claimnumber, entry.eob, entry.notes, id]
         );
             return updatedEntry; 

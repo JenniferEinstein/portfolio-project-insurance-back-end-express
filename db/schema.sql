@@ -9,7 +9,7 @@ CREATE TABLE entries (
     patient text NOT NULL,
     service_date text,
     description text NOT NULL,
-    cost NUMERIC(8,2),
+    cost NUMERIC(8,2) DEFAULT 0,
     insurance text,
     status text DEFAULT 'to send to insurance',
     sentto_how text,
