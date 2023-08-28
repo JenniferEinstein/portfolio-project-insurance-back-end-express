@@ -15,6 +15,6 @@ CREATE TABLE entries (
     sentto_how text,
     sentto_when date,
     claimnumber text,
-    EOB BOOLEAN DEFAULT false,
+    eob BOOLEAN DEFAULT false,
     notes text
 );

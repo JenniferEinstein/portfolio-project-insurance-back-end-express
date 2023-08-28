@@ -14,7 +14,6 @@ const {
     checkDescription,
     checkPatient,
 } = require("../validations/checkEntries");
-const checkEntries = require("../validations/checkEntries");
 
 
 
