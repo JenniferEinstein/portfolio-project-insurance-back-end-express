@@ -19,7 +19,7 @@ const getEntry = async(id) => {
         const oneEntry = await db.one("SELECT * FROM entries WHERE id=$1", id);
         return oneEntry;
     } catch (error) {
-        return { error: "entry not found" };
+        return res.status(404).json(deletedEntry) ;
     }
 };
 
@@ -39,8 +39,11 @@ const createEntry = async(entry) => {
 
 // === EDIT AN ENTRY (UPDATE) ===
 const updateEntry = async(id, entry) => {
-    try {const updatedEntry = await db.one(
-            "UPDATE entries SET patient=$1, service_date=TO_DATE($2, 'YYYY-MM-DD'), description=$3, cost=$4, insurance=$5, status=$6, sentto_how=$7, sentto_when=TO_DATE($8, 'YYYY-MM-DD'), claimnumber=$9, eob=$10, notes=$11 RETURNING *",
+    try {
+        const sentToWhenValue = entry.sentto_when ? `TO_DATE($8, 'YYYY-MM-DD')` : 'NULL';
+        
+        const updatedEntry = await db.one(
+            "UPDATE entries SET patient=$1, service_date=TO_DATE($2, 'YYYY-MM-DD'), description=$3, cost=$4, insurance=$5, status=$6, sentto_how=$7, sentto_when=" + sentToWhenValue + ", claimnumber=$9, eob=$10, notes=$11 RETURNING *",
             [entry.patient, entry.service_date, entry.description, entry.cost, entry.insurance, entry.status, entry.sentto_how, entry.sentto_when, entry.claimnumber, entry.eob, entry.notes, id]
         );
             return updatedEntry; 

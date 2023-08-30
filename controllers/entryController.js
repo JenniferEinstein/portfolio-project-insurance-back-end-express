@@ -27,16 +27,6 @@ entries.get("/", async(req,res)=>{
     }
 });
 
-// =====  SHOW ONE ENTRY =====
-entries.get("/:id", async(req,res)=>{
-    const id = req.params.id;
-    const entry = await getEntry(id);
-    if(entry) {
-        res.json(entry);
-    } else {
-        res.status(404).json({ error: "id not found" });
-    }
-});
 
 
 // =====  CREATE  =====
@@ -57,15 +47,26 @@ entries.put('/:id', checkBoolean, checkDescription, checkPatient, async(req,res)
     res.status(200).json(updatedEntry);
 });
 
+// =====  SHOW ONE ENTRY =====
+entries.get("/:id", async(req,res)=>{
+    const id = req.params.id;
+    const entry = await getEntry(id);
+    if(entry) {
+        res.json(entry);
+    } else {
+        res.status(404).json({ error: "id not found" });
+    }
+});
+
 
 // =====  DELETE  =====
-entries.delete('/entry/:id', async(req, res) => {
+entries.delete('/:id', async(req, res) => {
     const id = req.params.id;
     const deletedEntry = await deleteEntry(id);
     if (deletedEntry.id) {
         res.status(200).json(deletedEntry);
     } else {
-        res.status(404).json( {error: "Entry not found."} );
+        res.status(404).json( {error: "Tried to delete, but entry not found."} );
     }
 });
 

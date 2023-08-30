@@ -9,11 +9,11 @@ CREATE TABLE entries (
     patient text NOT NULL,
     service_date text,
     description text NOT NULL,
-    cost NUMERIC(8,2) DEFAULT 0,
+    cost NUMERIC(8,2) DEFAULT NULL,
     insurance text,
     status text DEFAULT 'to send to insurance',
     sentto_how text,
-    sentto_when date,
+    sentto_when date DEFAULT NULL,
     claimnumber text,
     eob BOOLEAN DEFAULT false,
     notes text
